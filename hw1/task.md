@@ -1,19 +1,21 @@
 # Hometask 1
 
-1. Write a Javascript program to create a new string which is n copies of a given string where n is a non-negative integer.
-
-  Sample Output: 
-  a
-  aa
-  aaa
-  aaaa
-  aaaaa
-
-2. Write a Javascript program to check if a string starts with "if".
-
+1. Write a Javascript program to create a new string which is n copies of a given string where n is a non-negative integer.  
   Sample Output:
-  true
-  false
+  ```
+    a
+    aa
+    aaa
+    aaaa
+    aaaaa
+  ```
+
+2. Write a Javascript program to check if a string starts with "if".  
+  Sample Output:
+  ```
+    true
+    false
+  ```
 
 3.  Write a Javascript program to check two non-negative integer values and return true if they have the same last digit
 
