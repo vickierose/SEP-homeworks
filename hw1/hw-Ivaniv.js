@@ -6,8 +6,6 @@ function copyString(string, count) {
 
 copyString('a', 5);
 
-
-
 //task2
 
 function searchSubString(subString) {
@@ -80,7 +78,6 @@ let a = 2; // 4
 let b = a++; // 2
 let c = ++a; // 4
 
-
 //task 6
 function getTypeToLowerCase() {
 
@@ -92,4 +89,3 @@ function getTypeToLowerCase() {
 }
 
 getTypeToLowerCase();
-
