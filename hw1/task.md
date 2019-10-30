@@ -19,11 +19,13 @@
 
 3.  Write a Javascript program to check two non-negative integer values and return true if they have the same last digit
 
-4. Написати програму, яка із введеного користувачем цілого чотирьохзначного числа (наприклад 5141):
+4. Write a programm which from inputed 4-digit number (e.g. 5154):
 
-  - знаходить суму цифр цього числа (5141 це 5+1+4+1 = 11).
-  - перевіряє чи є однакові цифри (двічі зустрічається цифра 1)
-  - перевіряє чи сума двох перших цифр чотирьохзначного числа рівна двом наступним (5141 → 5+1 = 6 і 4+1 = 5 → суми першої та другої пар цифр даного числа різні)
+  - finds a sum of digits in the number (5141 is 5+1+4+1 = 11).
+  - checks whether the number contains the same number twice (digit 1 appears 2 times)
+  - checks whether the sum of first to digits equals the sum of second two digits (5141 → 5+1 = 6 and 4+1 = 5 → sums of first and second pair of digits are not equal)
+
+  function may return an object with all results.
 
 5. what would be the result of next statements:
 
