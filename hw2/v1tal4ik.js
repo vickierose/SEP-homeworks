@@ -70,16 +70,48 @@ function getSumOfArray(arr = []) {
 // console.log(result);
 
 // 3. Write a Javascript program to split a delimited string into an array. Sample output:
-//   ```
-//     Original delimited string:
-//     Red, Green, Blue, White1, 3, 4, 5, 7String to array:
-//     ["Red", " Green", " Blue", " White"]
-//     [1, 3, 4, 5, 7]
-//   ```
 
 function splitToArray(str = '') {
+  const response = {
+    message: '',
+    arrOfString: [],
+    arrOfNumber: [],
+  };
 
+
+  if (typeof (str) !== 'string') {
+    response.message = 'Error: argument "str" must be type STRING';
+    return response;
+  }
+  if (!str) {
+    response.message = 'Error: argument "str" is invalid';
+    return response;
+  }
+
+  const arrOfStr = str.split(',');
+  const digit = /\d+/g;
+
+  arrOfStr.forEach((item) => {
+    if (item === ' ') {
+      return response.arrOfString.push(item);
+    }
+    // If it's just number
+    if (!(isNaN(+item))) {
+      return response.arrOfNumber.push(+item);
+    }
+    // If it's string and contains digit
+    const arrDigit = item.match(digit);
+    if (arrDigit) {
+      arrDigit.forEach((el) => response.arrOfNumber.push(+el));
+      item = item.replace(digit, '');
+    }
+    return response.arrOfString.push(item);
+  });
+  return response;
 }
+
+const result = splitToArray('Red, Green, Blue, White1, 3, 4, 5, 7');
+console.log(result);
 
 // 4. write a function which returns a factorial of a given number with loop and recursive function. Sample output:
 //   ```

@@ -90,10 +90,10 @@ describe('fn pickNumberOfArray', () => {
     expect(result.length).toEqual(2);
   });
 
-  // test('True elements', () => {
-  //   const result = pickNumberOfArray([1, 2], 2);
-  //   expect(result).toEqual([1, 2]);
-  // });
+  test('True elements', () => {
+    const result = pickNumberOfArray([1, 2], 2);
+    expect(result).toEqual([1, 2]);
+  });
 });
 
 
@@ -151,5 +151,117 @@ describe('fn getSumOfArray', () => {
   test('Usually arr with number', () => {
     const result = getSumOfArray([1, 0.3, 5]);
     expect(result).toEqual(6.3);
+  });
+});
+
+
+describe('fn splitToArray', () => {
+  test('Type of argument "str" is invalid', () => {
+    const result = splitToArray(123);
+    expect(result).toEqual({
+      message: 'Error: argument "str" must be type STRING',
+      arrOfString: [],
+      arrOfNumber: [],
+    });
+  });
+
+  test('Argument "str" is undefined', () => {
+    const result = splitToArray(undefined);
+    expect(result).toEqual({
+      message: 'Error: argument "str" is invalid',
+      arrOfString: [],
+      arrOfNumber: [],
+    });
+  });
+
+  test('Argument "str" is null', () => {
+    const result = splitToArray(null);
+    expect(result).toEqual({
+      message: 'Error: argument "str" must be type STRING',
+      arrOfString: [],
+      arrOfNumber: [],
+    });
+  });
+
+  test('Argument "str" is empty string', () => {
+    const result = splitToArray('');
+    expect(result).toEqual({
+      message: 'Error: argument "str" is invalid',
+      arrOfString: [],
+      arrOfNumber: [],
+    });
+  });
+
+  test('Without argument', () => {
+    const result = splitToArray();
+    expect(result).toEqual({
+      message: 'Error: argument "str" is invalid',
+      arrOfString: [],
+      arrOfNumber: [],
+    });
+  });
+
+  test('String composed of only letters', () => {
+    const result = splitToArray('asd,fgh,jkl,L,Uasd');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['asd', 'fgh', 'jkl', 'L', 'Uasd'],
+      arrOfNumber: [],
+    });
+  });
+
+  test('String composed of only digit', () => {
+    const result = splitToArray('123,2,-5,0,1.4');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: [],
+      arrOfNumber: [123, 2, -5, 0, 1.4],
+    });
+  });
+
+  test('String composed of digit and letters separately', () => {
+    const result = splitToArray('123,asd,2,-5,Akon,0,Has,1.4');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['asd', 'Akon', 'Has'],
+      arrOfNumber: [123, 2, -5, 0, 1.4],
+    });
+  });
+
+  test('String composed of letters and digit at the start or at the end of letters', () => {
+    const result = splitToArray('123asd,dft2,-5,Akon1,0,Has,1.4');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['asd', 'dft', 'Akon', 'Has'],
+      arrOfNumber: [123, 2, -5, 1, 0, 1.4],
+    });
+  });
+
+  test('String composed of letters and digit at the middle of letters', () => {
+    const result = splitToArray('a123sd,dft2,-5,Ak34on1,0,Ha6s6,1.4');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['asd', 'dft', 'Akon', 'Has'],
+      arrOfNumber: [123, 2, -5, 34, 1, 0, 6, 6, 1.4],
+    });
+  });
+
+  test('String composed of letters,digit and empty srting', () => {
+    const result = splitToArray('a123sd,dft2,-5, ,Ak34on1,0,Ha6s6,1.4');
+    // expect(result.arrOfNumber).toEqual([123, 2, -5, 0, 34, 1, 0, 6, 6, 1.4]);
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['asd', 'dft', ' ', 'Akon', 'Has'],
+      arrOfNumber: [123, 2, -5, 34, 1, 0, 6, 6, 1.4],
+    });
+  });
+
+  test('Expample test', () => {
+    const result = splitToArray('Red, Green, Blue, White1, 3, 4, 5, 7String');
+    expect(result).toEqual({
+      message: '',
+      arrOfString: ['Red', ' Green', ' Blue', ' White', ' String'],
+      arrOfNumber: [1, 3, 4, 5, 7],
+    });
   });
 });
