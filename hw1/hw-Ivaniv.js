@@ -1,19 +1,26 @@
 //task1
 
 function copyString(string, count) {
-    for(var i = 1; i <= count; i++) console.warn(string.repeat(i));
+    if (string == null) return;
+    var result = '';
+    for(var i = 1; i <= count; i++) {
+        result += string.repeat(i) + ' ';
+    }
+
+    return result;
 }
 
-copyString('a', 5);
+console.warn(copyString('a', 5));
+
 
 //task2
 
 function searchSubString(subString) {
-    if (subString == null) return;
+    if (!subString) return;
     return subString.toLowerCase().search(/^if/) >= 0 ? true : false;
 }
 
-console.warn(searchSubString('if sdfgsdf dfsgsdfgsdfgdf'), '');
+console.warn(searchSubString('if gjgjhvhjgv'));
 
 
 //task3
@@ -25,13 +32,17 @@ console.warn(checkLastDigits(12, 32541));
 
 //task4
 function sum(number) {
-    var temp = number.toString().split('').map(x => parseInt(x));
+    if (!number) return;
+
+    var temp = number.toString().split('').map(function(x) {
+        return parseInt(x);
+    });
 
     // search same numbers
-    console.warn(searchSameNumbers(temp), '');
+    console.warn(searchSameNumbers(temp));
 
     // summ dfdf
-    console.warn(splitArray(temp), '');
+    console.warn(splitArray(temp));
     
     // summ
     return temp.reduce(function (base, curent) {
@@ -39,10 +50,10 @@ function sum(number) {
     });
 }
 
-console.warn(sum(1656464584), '');
+console.warn(sum(1656464584));
 
 var validateMessage = '';
-function valibate(arrayNumbers) {
+function validate(arrayNumbers) {
     if (arrayNumbers == null) return null; 
     if (arrayNumbers.length > 4) {
         validateMessage = 'Ви ввели більше 4 чисел';
@@ -56,13 +67,15 @@ function valibate(arrayNumbers) {
 }
 
 function searchSameNumbers(arrayNumbers) {
-    if (!valibate(arrayNumbers)) return validateMessage;
-    var repeatNumber = arrayNumbers.filter((x, index, arr) => arr.indexOf(x) != index).join();
-    return repeatNumber != '' ? 'Повторюється число ' + repeatNumber : ' немає повторень';
+    if (!validate(arrayNumbers)) return validateMessage;
+    var repeatNumber = arrayNumbers.filter(function(x, index, arr) {
+        arr.indexOf(x) != index;
+    }).join();
+    return repeatNumber != '' ? `Повторюється число ${repeatNumber}` : `немає повторень`;
 }
 
 function splitArray(array) {
-    if (!valibate(array)) return validateMessage;
+    if (!validate(array)) return validateMessage;
     return array.slice(0, array.length / 2).reduce((base, curent) => base + curent) == 
             array.slice(array.length / 2, array.length).reduce((base, curent) => base + curent);
 }
@@ -85,7 +98,16 @@ function getTypeToLowerCase() {
         setTimeout(() => res("done"), 1000);
     });
 
-    console.warn(this.toString.call(nn).toLowerCase());
+    return nn;
 }
+
+console.warn(Object.prototype.toString.call(getTypeToLowerCase()).toLowerCase())
+
+console.warn(this.toString.call(getTypeToLowerCase()).toLowerCase());
+
+document.addEventListener('click', function() {
+    console.warn(this.toString.call(getTypeToLowerCase()).toLowerCase());
+});
+
 
 getTypeToLowerCase();
