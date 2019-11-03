@@ -1,11 +1,11 @@
 // 1
 
-randomNumbers = (arr, n) => {
+randomNumbers = (arr, num) => {
     let result = [];
-    if (n > arr.length) {
+    if (num > arr.length) {
         return 'Taken more elements than available !';
     } else {
-        while (n--) {
+        while (num--) {
             let x = arr[Math.floor(Math.random() * arr.length)];
             result.push(x);
         }
@@ -20,8 +20,8 @@ console.log(randomNumbers(numbers, 3));
 
 randomNumbers2 = (arr) => {
     let result = [];
-    let n = Math.floor(Math.random() * arr.length);
-    while (n--) {
+    let num = Math.floor(Math.random() * arr.length);
+    while (num--) {
         let x = arr[Math.floor(Math.random() * arr.length)];
         result.push(x);
     }
@@ -59,7 +59,7 @@ console.log(splitString('Red, Green, Blue, White1, 3, 4, 5, 7'));
 
 // 4
 
-getFactorial = (num) => {
+getFactorialLoop = (num) => {
     let result = num;
     if (num <= 0) {
         return 'Only positive number !';
@@ -71,24 +71,39 @@ getFactorial = (num) => {
     }
     return result;
 }
-console.log(getFactorial(5));
+
+console.log(getFactorialLoop(5));
+
+getFactorialRecursion = (num) => {
+    if (num <= 0) {
+        return 1;
+    } else {
+        return (num * factorial(num - 1));
+    }
+}
+
+console.log(getFactorialRecursion(5));
 
 // 5
 
-getFibonacci = (num) => {
-    let result = [];
-    if (num <= 0) {
-        return 'Only positive number !';
-    } else {
-        while (num >= 1) {
-            result.push(num);
-            num--;
-        };
+getFibonacciLoop = (num) => {
+    let one = 1;
+    let result = 1;
+    for (let i = 3; i <= num; i++) {
+      let sum = one + result;
+      one = result;
+      result = sum;
     }
-    return result.reduce((sum, current) => sum + current);
+    return result;
 }
 
-console.log(getFibonacci(10));
+console.log(getFibonacciLoop(10));
+
+getFibonacciRecursion = (num) => {
+    return num <= 1 ? num : getFibonacciRecursion(num - 1) + getFibonacciRecursion(num - 2);
+}
+
+console.log(getFibonacciRecursion(10));
 
 // 6
 
