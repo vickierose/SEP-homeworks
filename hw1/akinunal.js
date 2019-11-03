@@ -3,20 +3,17 @@
 console.log('------ Question 1: ------')
 
 let stringCreator = (str, num) => {
-    let strCopy = '';
+    let strCopy = str;
 
     if (num < 0) {
         console.log('Error: Number is negative!');
         return
     }
-
-    for (let i = 0; i < num; i++) {
-        strCopy += str
-        console.log(strCopy)
-    }
+    return strCopy.repeat(num)
 }
 
-stringCreator('a', 5)
+const repeatingString = stringCreator('a', 5)
+console.log(repeatingString)
 
 // 2. Write a Javascript program to check if a string starts with "if".
 
@@ -107,16 +104,11 @@ let c = ++a // 4 -> Third, c = 4 because ++a happens before = (a became 4)
 
 const nn = new Promise((res, rej) => {
     setTimeout(() => res("done"), 1000);
-}).then(value => {
-    console.log(typeof value.toLowerCase()) // I may misunderstood this question.
 })
 
+function getType(arg) {
+    console.log(toString.call(arg).toLowerCase())
+}
 
-
-
-
-
-
-
-
-
+getType(nn)
+getType('abc')
