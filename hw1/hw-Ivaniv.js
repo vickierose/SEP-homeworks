@@ -1,13 +1,7 @@
 //task1
 
 function copyString(string, count) {
-    if (string == null) return;
-    var result = '';
-    for(var i = 1; i <= count; i++) {
-        result += string.repeat(i) + ' ';
-    }
-
-    return result;
+    return string.repeat(count);
 }
 
 console.warn(copyString('a', 5));
@@ -102,10 +96,5 @@ function getTypeToLowerCase() {
 }
 
 console.warn(Object.prototype.toString.call(getTypeToLowerCase()).toLowerCase())
-console.warn(this.toString.call(getTypeToLowerCase()).toLowerCase());
-
-document.addEventListener('click', function() {
-    console.warn(this.toString.call(getTypeToLowerCase()).toLowerCase());
-});
 
 getTypeToLowerCase();
