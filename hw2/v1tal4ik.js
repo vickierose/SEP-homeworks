@@ -35,7 +35,7 @@ function pickNumberOfArray(arr = [], count = 0) {
 
   return subArr;
 }
-// const result = pickNumberOfArray([1, 2, 3], NaN);
+// const result = pickNumberOfArray([1, 2, 3,4,5], 2);
 // console.log(result);
 
 // 2. Write a Javascript program to compute the sum of elements in a given array. Sample output:
@@ -71,7 +71,7 @@ function getSumOfArray(arr = []) {
 
 // 3. Write a Javascript program to split a delimited string into an array. Sample output:
 
-function splitToArray(str = '') {
+function splitStringToArray(str = '') {
   const response = {
     message: '',
     arrOfString: [],
@@ -110,68 +110,108 @@ function splitToArray(str = '') {
   return response;
 }
 
-const result = splitToArray('Red, Green, Blue, White1, 3, 4, 5, 7');
-console.log(result);
+// const result = splitStringToArray('Red, Green, Blue, White1, 3, 4, 5, 7');
+// console.log(result);
 
 // 4. write a function which returns a factorial of a given number with loop and recursive function. Sample output:
-//   ```
-//     getFactorial(5) => 120
-//   ```
 
-function getFactorial() {
+function getFactorial(value) {
+  if (typeof (value) !== 'number' || value <= 0 || isNaN(value) || value % 1 !== 0) {
+    console.error('Error: argument value is invalid');
+    return 0;
+  }
 
+  let sum = value;
+  for (let i = value - 1; i > 0; i--) {
+    sum *= i;
+  }
+  return sum;
 }
 
-function getFactorialRecursive() {
+// console.log(getFactorial(5));
 
+function getFactorialRecursive(value) {
+  if (typeof (value) !== 'number' || value <= 0 || isNaN(value) || value % 1 !== 0) {
+    console.error('Error: argument value is invalid');
+    return 0;
+  }
+  while (value !== 1) {
+    return value * getFactorialRecursive(value - 1);
+  }
+  return 1;
 }
+
+// console.log(getFactorialRecursive(6));
 
 // 5. write a function which returns a Fibonacci value for a given number with loop and recursive function. Sample output:
-//   ```
-//     getFibonacci(10) => 55
-//   ```
 
-function getFibonacci() {
+function getFibonacci(value) {
+  if (typeof (value) !== 'number' || value <= 0 || isNaN(value) || value % 1 !== 0) {
+    console.error('Error: argument value is invalid');
+    return 0;
+  }
+  const holderNumber = {
+    1: 1,
+    2: 1,
+  };
 
+  for (let i = 3; i <= value; i++) {
+    holderNumber[i] = holderNumber[i - 1] + holderNumber[i - 2];
+  }
+
+  return holderNumber[value - 1] + holderNumber[value - 2];
 }
 
-function getFibonacciRecursive() {
+// console.log(getFibonacci(5));
 
+
+function getFibonacciRecursive(value) {
+  if (typeof (value) !== 'number' || value <= 0 || isNaN(value) || value % 1 !== 0) {
+    console.error('Error: argument value is invalid', value);
+    return 0;
+  }
+  while (value > 2) {
+    return getFibonacciRecursive(value - 1) + getFibonacciRecursive(value - 2);
+  }
+  return 1;
 }
+
+// console.log(getFibonacciRecursive(10));
+
 // 6. think and write the results of all console logs (without running code in console please :smiling_imp: ):
-//   ```javascript
-//   let car = "audi";
-//   let bike = "cannondale";
 
-//   function log () {
-//     let bike = "specialized";
-//     car = "jeep";
+// let car = "audi";
+// let bike = "cannondale";
 
-//     function inner () {
-//       let plane = "boeing";
-//       console.log(car);
-//       console.log(bike);
-//       console.log(plane);
-//     }
-//     console.log(inner);
-//     return inner;
+// function log () {
+//   let bike = "specialized";
+//   car = "jeep";
+
+//   function inner () {
+//     let plane = "boeing";
+//     console.log(car);    || 4. "jeep"
+//     console.log(bike);   || 5. "specialized"
+//     console.log(plane);  || 6. "boeing"
 //   }
+//   console.log(inner); ||3. Native Code inner ..
+//   return inner;
+// }
 
-//   console.log(car);
-//   console.log(bike);
+// console.log(car);  || 1."audi"
+// console.log(bike); || 2."cannondale"
 
-//   var logger = log();
-//   logger();
+// var logger = log();
+// logger();
 
-//   console.log(car);
-//   console.log(bike);
-//   inner();
-//   ```
+// console.log(car);  || 7."jeep"
+// console.log(bike); || 8."cannondale"
+// inner();           || 9. ???
+
 
 module.exports = {
   pickNumberOfArray,
   getSumOfArray,
-  splitToArray,
+  splitStringToArray,
   getFactorial,
   getFactorialRecursive,
   getFibonacci,

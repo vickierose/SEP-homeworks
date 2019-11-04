@@ -1,18 +1,11 @@
 const { pickNumberOfArray } = require('./v1tal4ik');
 const { getSumOfArray } = require('./v1tal4ik');
-const { splitToArray } = require('./v1tal4ik');
+const { splitStringToArray } = require('./v1tal4ik');
 const { getFactorial } = require('./v1tal4ik');
 const { getFactorialRecursive } = require('./v1tal4ik');
 const { getFibonacci } = require('./v1tal4ik');
 const { getFibonacciRecursive } = require('./v1tal4ik');
 
-
-// describe('fn repeatString', () => {
-//   test('Type of argument "str" is invalid', () => {
-//     const result = repeatString(123, 2);
-//     expect(result).toBe('Error: type of arguments are invalid');
-//   });
-// });
 
 describe('fn pickNumberOfArray', () => {
   test('Type of argument "arr" is invalid', () => {
@@ -155,9 +148,9 @@ describe('fn getSumOfArray', () => {
 });
 
 
-describe('fn splitToArray', () => {
+describe('fn splitStringToArray', () => {
   test('Type of argument "str" is invalid', () => {
-    const result = splitToArray(123);
+    const result = splitStringToArray(123);
     expect(result).toEqual({
       message: 'Error: argument "str" must be type STRING',
       arrOfString: [],
@@ -166,7 +159,7 @@ describe('fn splitToArray', () => {
   });
 
   test('Argument "str" is undefined', () => {
-    const result = splitToArray(undefined);
+    const result = splitStringToArray(undefined);
     expect(result).toEqual({
       message: 'Error: argument "str" is invalid',
       arrOfString: [],
@@ -175,7 +168,7 @@ describe('fn splitToArray', () => {
   });
 
   test('Argument "str" is null', () => {
-    const result = splitToArray(null);
+    const result = splitStringToArray(null);
     expect(result).toEqual({
       message: 'Error: argument "str" must be type STRING',
       arrOfString: [],
@@ -184,7 +177,7 @@ describe('fn splitToArray', () => {
   });
 
   test('Argument "str" is empty string', () => {
-    const result = splitToArray('');
+    const result = splitStringToArray('');
     expect(result).toEqual({
       message: 'Error: argument "str" is invalid',
       arrOfString: [],
@@ -193,7 +186,7 @@ describe('fn splitToArray', () => {
   });
 
   test('Without argument', () => {
-    const result = splitToArray();
+    const result = splitStringToArray();
     expect(result).toEqual({
       message: 'Error: argument "str" is invalid',
       arrOfString: [],
@@ -202,7 +195,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of only letters', () => {
-    const result = splitToArray('asd,fgh,jkl,L,Uasd');
+    const result = splitStringToArray('asd,fgh,jkl,L,Uasd');
     expect(result).toEqual({
       message: '',
       arrOfString: ['asd', 'fgh', 'jkl', 'L', 'Uasd'],
@@ -211,7 +204,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of only digit', () => {
-    const result = splitToArray('123,2,-5,0,1.4');
+    const result = splitStringToArray('123,2,-5,0,1.4');
     expect(result).toEqual({
       message: '',
       arrOfString: [],
@@ -220,7 +213,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of digit and letters separately', () => {
-    const result = splitToArray('123,asd,2,-5,Akon,0,Has,1.4');
+    const result = splitStringToArray('123,asd,2,-5,Akon,0,Has,1.4');
     expect(result).toEqual({
       message: '',
       arrOfString: ['asd', 'Akon', 'Has'],
@@ -229,7 +222,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of letters and digit at the start or at the end of letters', () => {
-    const result = splitToArray('123asd,dft2,-5,Akon1,0,Has,1.4');
+    const result = splitStringToArray('123asd,dft2,-5,Akon1,0,Has,1.4');
     expect(result).toEqual({
       message: '',
       arrOfString: ['asd', 'dft', 'Akon', 'Has'],
@@ -238,7 +231,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of letters and digit at the middle of letters', () => {
-    const result = splitToArray('a123sd,dft2,-5,Ak34on1,0,Ha6s6,1.4');
+    const result = splitStringToArray('a123sd,dft2,-5,Ak34on1,0,Ha6s6,1.4');
     expect(result).toEqual({
       message: '',
       arrOfString: ['asd', 'dft', 'Akon', 'Has'],
@@ -247,8 +240,7 @@ describe('fn splitToArray', () => {
   });
 
   test('String composed of letters,digit and empty srting', () => {
-    const result = splitToArray('a123sd,dft2,-5, ,Ak34on1,0,Ha6s6,1.4');
-    // expect(result.arrOfNumber).toEqual([123, 2, -5, 0, 34, 1, 0, 6, 6, 1.4]);
+    const result = splitStringToArray('a123sd,dft2,-5, ,Ak34on1,0,Ha6s6,1.4');
     expect(result).toEqual({
       message: '',
       arrOfString: ['asd', 'dft', ' ', 'Akon', 'Has'],
@@ -257,11 +249,242 @@ describe('fn splitToArray', () => {
   });
 
   test('Expample test', () => {
-    const result = splitToArray('Red, Green, Blue, White1, 3, 4, 5, 7String');
+    const result = splitStringToArray('Red, Green, Blue, White1, 3, 4, 5, 7String');
     expect(result).toEqual({
       message: '',
       arrOfString: ['Red', ' Green', ' Blue', ' White', ' String'],
       arrOfNumber: [1, 3, 4, 5, 7],
     });
+  });
+});
+
+
+describe('fn getFactorial', () => {
+  test('Type of argument "number" is string', () => {
+    const result = getFactorial('123');
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is undefined', () => {
+    const result = getFactorial(undefined);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is null', () => {
+    const result = getFactorial(null);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is object', () => {
+    const result = getFactorial({});
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is NaN ', () => {
+    const result = getFactorial(NaN);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is negative number ', () => {
+    const result = getFactorial(-5);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is number with point ', () => {
+    const result = getFactorial(1.5);
+    expect(result).toEqual(0);
+  });
+
+  test('Without argument', () => {
+    const result = getFactorial();
+    expect(result).toEqual(0);
+  });
+
+  test('Return number', () => {
+    const result = getFactorial();
+    expect(typeof (result)).toBe('number');
+  });
+
+  test('Normal number 0', () => {
+    const result = getFactorial(0);
+    expect(result).toEqual(0);
+  });
+
+  test('Normal number 5 ', () => {
+    const result = getFactorial(5);
+    expect(result).toEqual(120);
+  });
+});
+
+describe('fn getFactorialRecursive', () => {
+  test('Type of argument "number" is string', () => {
+    const result = getFactorialRecursive('123');
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is undefined', () => {
+    const result = getFactorialRecursive(undefined);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is null', () => {
+    const result = getFactorialRecursive(null);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is object', () => {
+    const result = getFactorialRecursive({});
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is NaN ', () => {
+    const result = getFactorialRecursive(NaN);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is negative number ', () => {
+    const result = getFactorialRecursive(-5);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is number with point ', () => {
+    const result = getFactorialRecursive(1.5);
+    expect(result).toEqual(0);
+  });
+
+  test('Without argument', () => {
+    const result = getFactorialRecursive();
+    expect(result).toEqual(0);
+  });
+
+  test('Return number', () => {
+    const result = getFactorialRecursive();
+    expect(typeof (result)).toBe('number');
+  });
+
+  test('Normal number 0', () => {
+    const result = getFactorialRecursive(0);
+    expect(result).toEqual(0);
+  });
+
+  test('Normal number 5 ', () => {
+    const result = getFactorialRecursive(5);
+    expect(result).toEqual(120);
+  });
+});
+
+
+describe('fn getFibonacci', () => {
+  test('Type of argument "number" is string', () => {
+    const result = getFibonacci('123');
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is undefined', () => {
+    const result = getFibonacci(undefined);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is null', () => {
+    const result = getFibonacci(null);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is object', () => {
+    const result = getFibonacci({});
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is NaN ', () => {
+    const result = getFibonacci(NaN);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is negative number ', () => {
+    const result = getFibonacci(-5);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is number with point ', () => {
+    const result = getFibonacci(1.5);
+    expect(result).toEqual(0);
+  });
+
+  test('Without argument', () => {
+    const result = getFibonacci();
+    expect(result).toEqual(0);
+  });
+
+  test('Return number', () => {
+    const result = getFibonacci(123);
+    expect(typeof (result)).toBe('number');
+  });
+
+  test('Normal number 0', () => {
+    const result = getFibonacci(0);
+    expect(result).toEqual(0);
+  });
+
+  test('Normal number 10 ', () => {
+    const result = getFibonacci(10);
+    expect(result).toEqual(55);
+  });
+});
+
+
+describe('fn getFibonacciRecursive', () => {
+  test('Type of argument "number" is string', () => {
+    const result = getFibonacciRecursive('123');
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is undefined', () => {
+    const result = getFibonacciRecursive(undefined);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is null', () => {
+    const result = getFibonacciRecursive(null);
+    expect(result).toEqual(0);
+  });
+
+  test('Type of argument "number" is object', () => {
+    const result = getFibonacciRecursive({});
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is NaN ', () => {
+    const result = getFibonacciRecursive(NaN);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is negative number ', () => {
+    const result = getFibonacciRecursive(-5);
+    expect(result).toEqual(0);
+  });
+
+  test('Argument "number" is number with point ', () => {
+    const result = getFibonacciRecursive(1.5);
+    expect(result).toEqual(0);
+  });
+
+  test('Without argument', () => {
+    const result = getFibonacciRecursive();
+    expect(result).toEqual(0);
+  });
+
+  test('Return number', () => {
+    const result = getFibonacciRecursive(2);
+    expect(typeof (result)).toBe('number');
+  });
+
+  test('Normal number 0', () => {
+    const result = getFibonacciRecursive(0);
+    expect(result).toEqual(0);
+  });
+
+  test('Normal number 5 ', () => {
+    const result = getFibonacciRecursive(10);
+    expect(result).toEqual(55);
   });
 });
