@@ -7,7 +7,7 @@ randomNumbers = (arr, num) => {
     } else {
         while (num--) {
             let x = arr[Math.floor(Math.random() * arr.length)];
-            result.push(x);
+            !result.includes(x) ? result.push(x) : num++;
         }
     }
     return `${result.length} random elements from array: ${result}`;
@@ -23,7 +23,7 @@ randomNumbers2 = (arr) => {
     let num = Math.floor(Math.random() * arr.length);
     while (num--) {
         let x = arr[Math.floor(Math.random() * arr.length)];
-        result.push(x);
+        !result.includes(x) ? result.push(x) : num++;
     }
     return `${result.length} random elements from array: ${result}`;
 }
