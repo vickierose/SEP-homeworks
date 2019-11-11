@@ -25,26 +25,26 @@ function checkLastDigits(first, second) {
 console.warn(checkLastDigits(12, 32541));
 
 //task4
-function sum(number) {
-    if (!number) return;
-
-    var temp = number.toString().split('').map(function(x) {
-        return parseInt(x);
-    });
-
-    // search same numbers
-    console.warn(searchSameNumbers(temp));
-
-    // summ dfdf
-    console.warn(splitArray(temp));
-    
+function summAllArayElement(array) {
+    if (!array || array.length == 0) return;
     // summ
-    return temp.reduce(function (base, curent) {
+    return array.reduce(function (base, curent) {
         return base + curent;
     });
 }
 
-console.warn(sum(1656464584));
+function basePartTaskFour(number) {
+    var temp = number.toString().split('').map(function(x) {
+        return parseInt(x);
+    });
+
+    return { temp: temp, firstPart: searchSameNumbers(temp), seconsPart: particialSumFromAray(temp) }
+}
+
+console.warn(summAllArayElement(basePartTaskFour(1656464584).temp));
+
+console.warn(basePartTaskFour(5656));
+
 
 var validateMessage = '';
 function validate(arrayNumbers) {
@@ -62,13 +62,11 @@ function validate(arrayNumbers) {
 
 function searchSameNumbers(arrayNumbers) {
     if (!validate(arrayNumbers)) return validateMessage;
-    var repeatNumber = arrayNumbers.filter(function(x, index, arr) {
-        arr.indexOf(x) != index;
-    }).join();
+    var repeatNumber = arrayNumbers.filter((x, index, arr) => arr.indexOf(x) === index);
     return repeatNumber != '' ? `Повторюється число ${repeatNumber}` : `немає повторень`;
 }
 
-function splitArray(array) {
+function particialSumFromAray(array) {
     if (!validate(array)) return validateMessage;
     return array.slice(0, array.length / 2).reduce((base, curent) => base + curent) == 
             array.slice(array.length / 2, array.length).reduce((base, curent) => base + curent);
