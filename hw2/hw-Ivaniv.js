@@ -9,6 +9,7 @@ function randomElement(arr) {
     }
     return result;
 }
+
 console.warn(randomElement(array));
 
 //task 2
@@ -66,8 +67,6 @@ function factorialLoop(x) {
 }
 
 console.warn(factorialLoop(5));
-
-
 
 //task 5
 
