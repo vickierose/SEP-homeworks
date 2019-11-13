@@ -1,13 +1,14 @@
 //task 1
 var array = [12, 34, 23, 56];
 
+
 function randomElement(arr) {
     var randomCount = Math.floor(Math.random() * (arr.length - 0 + 1)) + 0;
     var result = [];
     for (var i = 0; i <= randomCount; i++) {
         result.push(arr[Math.floor(Math.random() * randomCount)]);
     }
-    return result;
+    return result.filter((x, index) => arr.indexOf(x) === index);;
 }
 
 console.warn(randomElement(array));
@@ -44,7 +45,8 @@ function format(string) {
         }
     });
 
-    return [numberArrayResult, stringArrayResult];
+    
+    return { numberArrayResult: numberArrayResult, stringArrayResult: stringArrayResult};
 }
 console.warn(format(baseString));
 
@@ -117,4 +119,4 @@ logger();
 
 console.log(car); //audi
 console.log(bike); //cannondale
-inner();
+inner(); //error
