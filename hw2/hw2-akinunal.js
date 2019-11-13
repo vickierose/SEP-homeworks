@@ -74,7 +74,7 @@ console.log(stringToArray(delimitedString))
 */
 console.log('------ Question 4: ------')
 
-let getFactorial = num => {
+let getFactorialLoop = num => {
   let result = 1
   for (let i = num; i > 0; i--) {
     result = result * i
@@ -82,21 +82,44 @@ let getFactorial = num => {
   return result
 }
 
-console.log(getFactorial(5))
+console.log(getFactorialLoop(5));
+
+let getFactorialRecursive = num => {
+  if (num <= 0) {
+    return 1
+  }
+  return num * getFactorialRecursive(num - 1)
+}
+
+console.log(getFactorialRecursive(5));
 
 /* 5. Write a function which returns a Fibonacci value for a given number with loop and recursive function. Sample output:
   getFibonacci(10) => 55
 */
 console.log('------ Question 5: ------')
 
-let getFibonacci = num => {
+let getFibonacciRecursive = num => {
   if (num <= 2) return 1
   if (num > 40) return `Please use a number smaller than 40, so you don't crash the browser :)`
 
-  return getFibonacci(num - 1) + getFibonacci(num - 2)
+  return getFibonacciRecursive(num - 1) + getFibonacciRecursive(num - 2)
 }
 
-console.log(getFibonacci(10))
+console.log(getFibonacciRecursive(10));
+
+let getFibonacciLoop = num => {
+  let first = 1;
+  let second = 1;
+  let result = 0;
+  for (let i = 3; i <= num; i++) {
+    result = first + second;
+    first = second;
+    second = result;
+  }
+  return result
+}
+
+console.log(getFibonacciLoop(10));
 
 /* 6. Think and write the results of all console logs (without running code in console please):
 let car = "audi";
