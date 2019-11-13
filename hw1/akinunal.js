@@ -106,9 +106,9 @@ const nn = new Promise((res, rej) => {
     setTimeout(() => res("done"), 1000);
 })
 
-function getType(arg) {
-    console.log(toString.call(arg).toLowerCase())
+let getType = arg => {
+    return Object.getPrototypeOf(arg).constructor.name.toLowerCase();
 }
 
-getType(nn)
-getType('abc')
+console.log(getType(nn));
+console.log(getType('abc'));
