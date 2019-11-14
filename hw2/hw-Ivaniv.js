@@ -2,13 +2,15 @@
 var array = [12, 34, 23, 56];
 
 
-function randomElement(arr) {
-    var randomCount = Math.floor(Math.random() * (arr.length - 0 + 1)) + 0;
+function randomElement(array) {
+    var randomCount = Math.floor(Math.random() * (array.length - 0 + 1)) + 0;
+
     var result = [];
     for (var i = 0; i <= randomCount; i++) {
-        result.push(arr[Math.floor(Math.random() * randomCount)]);
+        result.push(array[Math.floor(Math.random() * randomCount)]);
     }
-    return result.filter((x, index) => arr.indexOf(x) === index);;
+    
+    return result.filter((x, index, arr) => arr.indexOf(x) === index);
 }
 
 console.warn(randomElement(array));
