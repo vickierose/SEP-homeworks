@@ -8,6 +8,25 @@ const validateObj = (obj) => {
     msg: '',
   };
 
+  if (typeof (obj) !== 'object') {
+    console.error('Error : Wrong type of argument!');
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Wrong type of argument!';
+    return info;
+  }
+  if (obj === null || Object.getPrototypeOf(obj).constructor.name.toLowerCase() !== 'object') {
+    console.error('Error : Wrong type of argument!');
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Wrong type of argument!';
+    return info;
+  }
+  if (Object.keys(obj).length === 0) {
+    console.error('Error : Object is empty');
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Object is empty!';
+    return info;
+  }
+
   // Check name of main property
   // eslint-disable-next-line no-restricted-syntax
   for (const propName of allOfMainProp) {
