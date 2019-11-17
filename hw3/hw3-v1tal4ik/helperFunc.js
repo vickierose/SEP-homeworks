@@ -14,7 +14,6 @@ const validateObj = (obj) => {
     if (!(obj.hasOwnProperty(propName))) {
       info.isObjHasAllProperty = false;
       info.msg = `Error : Object does not have propery "${propName}"! `;
-      // console.log(info);
       return info;
     }
   }
@@ -23,7 +22,6 @@ const validateObj = (obj) => {
   if (Object.keys(obj).length !== allOfMainProp.length) {
     info.isObjHasAllProperty = false;
     info.msg = `Error : Object propery length = ${Object.keys(obj).length} and must be = ${Object.keys(allOfMainProp).length}`;
-    // console.log(info);
     return info;
   }
 
@@ -38,7 +36,6 @@ const validateObj = (obj) => {
     if (!(obj.address.hasOwnProperty(propName))) {
       info.isObjHasAllProperty = false;
       info.msg = `Error : Object does not have propery "${propName}"! `;
-      // console.log(info);
       return info;
     }
   }
@@ -46,7 +43,6 @@ const validateObj = (obj) => {
   if (Object.keys(obj.address).length !== allOfAddressProp.length) {
     info.isObjHasAllProperty = false;
     info.msg = `Error : Object address propery length = ${Object.keys(obj).length} and must be = ${Object.keys(allOfAddressProp).length}`;
-    // console.log(info);
     return info;
   }
 
@@ -61,7 +57,6 @@ const validateObj = (obj) => {
     if (!(obj.job.hasOwnProperty(propName))) {
       info.isObjHasAllProperty = false;
       info.msg = `Error : Object job does not have propery "${propName}"!`;
-      // console.log(info);
       return info;
     }
   }
@@ -69,15 +64,19 @@ const validateObj = (obj) => {
   if (Object.keys(obj.job).length !== allOfJobProp.length) {
     info.isObjHasAllProperty = false;
     info.msg = `Error : Object job propery length = ${Object.keys(obj).length} and must be = ${Object.keys(allOfJobProp).length}`;
-    // console.log(info);
     return info;
   }
 
 
-  // Check type
+  // Check main property type
   if (obj.firstName === '' || typeof (obj.firstName) !== 'string') {
     info.isObjPropertyTypeRight = false;
     info.msg = 'Error : Type of property "firstName" is invalid!';
+    return info;
+  }
+  if (obj.lastName === '' || typeof (obj.lastName) !== 'string') {
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Type of property "lastName" is invalid!';
     return info;
   }
   if (obj.birthDate === '' || typeof (obj.birthDate) !== 'string') {
@@ -86,8 +85,31 @@ const validateObj = (obj) => {
     return info;
   }
 
+  // Check type of child property of address
+  // eslint-disable-next-line no-restricted-syntax
+  for (const propName in obj.address) {
+    if (typeof (obj.address[propName]) !== 'string') {
+      info.isObjPropertyTypeRight = false;
+      info.msg = `Error : Type of property "${propName}" is invalid!`;
+      return info;
+    }
+  }
+
+  // Check type of child property of job
+  if (obj.job.title === '' || typeof (obj.job.title) !== 'string') {
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Type of property "title" is invalid!';
+    return info;
+  }
+  if (isNaN(obj.job.experience) || obj.job.experience < 0 || typeof (obj.job.experience) !== 'number') {
+    info.isObjPropertyTypeRight = false;
+    info.msg = 'Error : Type of property "experience" is invalid!';
+    return info;
+  }
+
 
   return info;
 };
+
 
 module.exports = validateObj;

@@ -1,5 +1,7 @@
 // 1. write a constructor function `PersonFunc` whith methods : getFullName() getAge() getFullAddress();
 const validateObj = require('./helperFunc');
+const { SarahMay, JeremieBrown, Elizabeth } = require('./people.data');
+
 
 const PersonFunc = function (obj) {
   if (typeof (obj) !== 'object') {
@@ -24,13 +26,13 @@ const PersonFunc = function (obj) {
     console.warn('Use operator "new" for the next call PersonFunc()');
     return new PersonFunc(obj);
   }
-  const { isObjHasAllProperty, isObjPropertyTypeRight, msg } = validateObj(obj);
-  // console.log(isObjHasAllProperty, isObjPropertyTypeRight, msg);
+  this.person = obj;
+  this.getInfoOfValidate = validateObj;
+  const { isObjHasAllProperty, isObjPropertyTypeRight, msg } = this.getInfoOfValidate(this.person);
   if (!isObjHasAllProperty || !isObjPropertyTypeRight) {
     return { msg };
   }
 
-  this.person = obj;
   this.getFullName = () => `${this.person.firstName} ${this.person.lastName}`;
   this.getFullAddress = () => `${this.person.address.country}, ${this.person.address.city}, ${this.person.address.street}, ${this.person.address.house}/${this.person.address.apartment}`;
   this.getAge = () => {
@@ -40,32 +42,16 @@ const PersonFunc = function (obj) {
   };
 };
 
-const SarahMay = {
-  firstName: 'Sarah',
-  lastName: 'May',
-  birthDate: '13.03.1990',
-  address: {
-    country: 'Spain',
-    city: 'Seville',
-    street: 'calle Verde',
-    house: '5',
-    apartment: '2A',
-  },
-  job: {
-    title: 'teacher',
-    experience: 5,
-  },
-};
-
-// delete Elizabeth.job.title;
-// Elizabeth.job = {};
-// SarahMay.extraProp = 'extraProp';
-// Elizabeth.birthDate = 5;
-const person = new PersonFunc(SarahMay);
-console.log(person.getFullName());
+const result = new PersonFunc(SarahMay);
+console.log(result.hasOwnProperty('getFullName'));
 
 
 // 2. write a constructor function `WorkingPersonFunc` which inherits from `PersonFunc` and has extra method: getProfessionalNameAndRank();
+
+
+module.exports = {
+  PersonFunc,
+};
 
 
 // 3. write a class `PersonClass` which has the same functionality as `PersonFunc` constructor function.
@@ -76,6 +62,7 @@ console.log(person.getFullName());
 
 // 5. create a few instances of each class and call the methods to check whether they work correctly. You can use objects from `people.data.js` for check.
 
-module.exports = {
-  PersonFunc,
-};
+
+// module.exports = {
+//   PersonFunc,
+// };

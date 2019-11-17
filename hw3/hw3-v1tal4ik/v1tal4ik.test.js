@@ -1,36 +1,7 @@
 const { PersonFunc } = require('./v1tal4ik');
-
-const SarahMay = {
-  firstName: 'Sarah',
-  lastName: 'May',
-  birthDate: '13.03.1990',
-  address: {
-    country: 'Spain',
-    city: 'Seville',
-    street: 'calle Verde',
-    house: '5',
-    apartment: '2A',
-  },
-  job: {
-    title: 'teacher',
-    experience: 5,
-  },
-};
-
-
-// describe('fn pickNumberOfArray', () => {
-//   test('Type of argument "arr" is invalid', () => {
-//     const result = pickNumberOfArray('123', 2);
-//     expect(result).toEqual([]);
-//   });
-// });
+const { SarahMay } = require('./people.data');
 
 describe('fn PersonFunc', () => {
-  test('Return obj', () => {
-    const result = new PersonFunc();
-    expect(typeof (result)).toBe('object');
-  });
-
   test('Type of argument NUMBER', () => {
     const result = new PersonFunc(123);
     expect(result).toEqual({
@@ -167,6 +138,10 @@ describe('fn PersonFunc', () => {
     expect(result).toEqual({
       msg: 'Error : Type of property "job" is invalid!',
     });
+    SarahMay.job = {
+      title: 'teacher',
+      experience: 5,
+    };
   });
 
   test('Property job is empty Object', () => {
@@ -179,6 +154,80 @@ describe('fn PersonFunc', () => {
       title: 'teacher',
       experience: 5,
     };
+  });
+
+  test('Property firstName has wrong type', () => {
+    SarahMay.firstName = 123;
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "firstName" is invalid!',
+    });
+    SarahMay.firstName = 'Sarah';
+  });
+
+  test('Property lastName has wrong type', () => {
+    SarahMay.lastName = 123;
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "lastName" is invalid!',
+    });
+    SarahMay.lastName = 'May';
+  });
+
+  test('Property birthDate has wrong type', () => {
+    SarahMay.birthDate = 123;
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "birthDate" is invalid!',
+    });
+    SarahMay.birthDate = '13.03.1990';
+  });
+
+  test('Property country has wrong type', () => {
+    SarahMay.address.country = 123;
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "country" is invalid!',
+    });
+    SarahMay.address.country = 'Spain';
+  });
+
+  test('Property title has wrong type', () => {
+    SarahMay.job.title = 123;
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "title" is invalid!',
+    });
+    SarahMay.job.title = 'Spain';
+  });
+
+  test('Property experience has wrong type', () => {
+    SarahMay.job.experience = '123';
+    const result = new PersonFunc(SarahMay);
+    expect(result).toEqual({
+      msg: 'Error : Type of property "experience" is invalid!',
+    });
+    SarahMay.job.experience = 5;
+  });
+
+  test('Return obj', () => {
+    const result = new PersonFunc(SarahMay);
+    expect(typeof (result)).toBe('object');
+  });
+
+  test('Return obj has method getFullName()', () => {
+    const result = new PersonFunc(SarahMay);
+    expect(result.hasOwnProperty('getFullName')).toBe(true);
+  });
+
+  test('Return obj has method getFullAddress()', () => {
+    const result = new PersonFunc(SarahMay);
+    expect(result.hasOwnProperty('getFullAddress')).toBeTruthy();
+  });
+
+  test('Return obj has method getAge()', () => {
+    const result = new PersonFunc(SarahMay);
+    expect(result.hasOwnProperty('getAge')).toBeTruthy();
   });
 
   test('Get full name', () => {
