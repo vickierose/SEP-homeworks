@@ -1,6 +1,10 @@
-const {
+// const {
+//   PersonFunc, WorkingPersonFunc, PersonClass, WorkingPersonClass,
+// } = require('./v1tal4ik');
+import {
   PersonFunc, WorkingPersonFunc, PersonClass, WorkingPersonClass,
-} = require('./v1tal4ik');
+} from './v1tal4ik.js';
+
 const { SarahMay } = require('./people.data');
 
 describe('fn PersonFunc', () => {

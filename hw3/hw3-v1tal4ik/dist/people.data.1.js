@@ -1,4 +1,9 @@
-const SarahMay = {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SarahMay = exports.SarahMay = {
   firstName: 'Sarah',
   lastName: 'May',
   birthDate: '13.03.1990',
@@ -7,15 +12,15 @@ const SarahMay = {
     city: 'Seville',
     street: 'calle Verde',
     house: '5',
-    apartment: '2A',
+    apartment: '2A'
   },
   job: {
     title: 'teacher',
-    experience: 5,
-  },
+    experience: 5
+  }
 };
 
-const JeremieBrown = {
+var JeremieBrown = exports.JeremieBrown = {
   firstName: 'Jeremie',
   lastName: 'Brown',
   birthDate: '10.11.1983',
@@ -23,15 +28,15 @@ const JeremieBrown = {
     country: 'Great Britain',
     city: 'Bristol',
     street: 'Park street',
-    house: '14',
+    house: '14'
   },
   job: {
     title: 'sale manager',
-    experience: 10,
-  },
+    experience: 10
+  }
 };
 
-const Elizabeth = {
+var Elizabeth = exports.Elizabeth = {
   firstName: 'Elizabeth',
   birthDate: '27.02.1998',
   address: {
@@ -39,16 +44,10 @@ const Elizabeth = {
     city: 'Verona',
     street: 'via Calchirelli',
     house: '9F',
-    apartment: '49',
+    apartment: '49'
   },
   job: {
     title: 'fitness coach',
-    experience: 1.5,
-  },
-};
-
-module.exports = {
-  SarahMay,
-  JeremieBrown,
-  Elizabeth,
+    experience: 1.5
+  }
 };

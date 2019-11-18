@@ -126,9 +126,7 @@ const validateObj = (obj) => {
     return info;
   }
 
-
   return info;
 };
 
-
-module.exports = validateObj;
+export default validateObj;
