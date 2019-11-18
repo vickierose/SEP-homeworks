@@ -90,26 +90,26 @@ const validateObj = (obj) => {
   // Check main property type
   if (obj.firstName === '' || typeof (obj.firstName) !== 'string') {
     info.isObjPropertyTypeRight = false;
-    info.msg = 'Error : Type of property "firstName" is invalid!';
+    info.msg = 'Error : Type of property "firstName" is invalid or empty!';
     return info;
   }
   if (obj.lastName === '' || typeof (obj.lastName) !== 'string') {
     info.isObjPropertyTypeRight = false;
-    info.msg = 'Error : Type of property "lastName" is invalid!';
+    info.msg = 'Error : Type of property "lastName" is invalid or empty!';
     return info;
   }
   if (obj.birthDate === '' || typeof (obj.birthDate) !== 'string') {
     info.isObjPropertyTypeRight = false;
-    info.msg = 'Error : Type of property "birthDate" is invalid!';
+    info.msg = 'Error : Type of property "birthDate" is invalid or empty!';
     return info;
   }
 
   // Check type of child property of address
   // eslint-disable-next-line no-restricted-syntax
   for (const propName in obj.address) {
-    if (typeof (obj.address[propName]) !== 'string') {
+    if (typeof (obj.address[propName]) !== 'string' || obj.address[propName].trim() === '') {
       info.isObjPropertyTypeRight = false;
-      info.msg = `Error : Type of property "${propName}" is invalid!`;
+      info.msg = `Error : Type of property "${propName}" is invalid or empty!`;
       return info;
     }
   }
@@ -117,7 +117,7 @@ const validateObj = (obj) => {
   // Check type of child property of job
   if (obj.job.title === '' || typeof (obj.job.title) !== 'string') {
     info.isObjPropertyTypeRight = false;
-    info.msg = 'Error : Type of property "title" is invalid!';
+    info.msg = 'Error : Type of property "title" is invalid or empty!';
     return info;
   }
   if (isNaN(obj.job.experience) || obj.job.experience < 0 || typeof (obj.job.experience) !== 'number') {

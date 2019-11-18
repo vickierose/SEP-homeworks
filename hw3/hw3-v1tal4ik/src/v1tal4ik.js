@@ -13,7 +13,10 @@ const PersonFunc = function (obj) {
 
 
 PersonFunc.prototype.getFullName = function () { return `${this.person.firstName} ${this.person.lastName}`; };
-PersonFunc.prototype.getFullAddress = function () { return `${this.person.address.country}, ${this.person.address.city}, ${this.person.address.street}, ${this.person.address.house}/${this.person.address.apartment}`; };
+PersonFunc.prototype.getFullAddress = function () {
+  const { country, city, street, house, apartment } = this.person.address;
+  return `${country}, ${city}, ${street}, ${house}/${apartment}`;
+};
 PersonFunc.prototype.getAge = function () {
   const nowYear = new Date().getFullYear();
   const birthYear = this.person.birthDate.split('.').pop();
@@ -33,9 +36,10 @@ const WorkingPersonFunc = function (obj) {
 WorkingPersonFunc.prototype = Object.create(PersonFunc.prototype);
 WorkingPersonFunc.prototype.constructor = WorkingPersonFunc;
 WorkingPersonFunc.prototype.getProfessionalNameAndRank = function () {
-  const { firstName, lastName, job: { title, experience } } = this.person;
-  return `${firstName} ${lastName}, ${title}, job experiance ${experience} years`;
+    const {job: { title, experience } } = this.person;
+  return `${this.getFullName(this)}, ${title}, job experiance ${experience} years`;
 };
+
 
 // 3. write a class `PersonClass` which has the same functionality as `PersonFunc` constructor function.
 class PersonClass {
@@ -74,11 +78,10 @@ class WorkingPersonClass extends PersonClass {
   }
 
   getProfessionalNameAndRank() {
-    const { firstName, lastName, job: { title, experience } } = this.person;
-    return `${firstName} ${lastName}, ${title}, job experiance ${experience} years`;
+    const {job: { title, experience } } = this.person;
+  return `${this.getFullName(this)}, ${title}, job experiance ${experience} years`;
   }
 }
-
 
 // 5. create a few instances of each class and call the methods to check whether they work correctly. You can use objects from `people.data.js` for check.
 console.log('********* PersonFunc ********** ');
@@ -147,7 +150,6 @@ const customPerson = new WorkingPersonClass({
     experience: 0.5,
   },
 });
-
 console.log('* getFullName :', customPerson.getFullName());
 console.log('* getFullAddress :', customPerson.getFullAddress());
 console.log('* getAge :', customPerson.getAge());
