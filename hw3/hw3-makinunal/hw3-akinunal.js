@@ -28,7 +28,15 @@ function PersonFunc(prs) {
     }
 
     this.getFullAddress = function () {
-        return `${this.person.address.country}, ${this.person.address.city}, ${this.person.address.street}, ${this.person.address.house}/${this.person.address.apartment}`
+        const { country, city, street, apartment, house } = this.person.address;
+        if (!country || !city || !street || !house) {
+            return `Please fill all the fields.`
+        }
+        let result = `${country}, ${city}, ${street}, ${house}`
+        if (apartment) {
+            result = `${result} / ${apartment}`
+        }
+        return result
     }
 }
 
@@ -65,14 +73,14 @@ class PersonClass {
     constructor(person) {
         this.person = person
     }
-    fullName = function () {
+    fullName() {
         if (!this.person.firstName || !this.person.lastName) {
             return `Unknown first/last name.`
         }
         return `${this.person.firstName} ${this.person.lastName}`;
     }
 
-    getAge = function () {
+    getAge() {
         let date = new Date()
         let currentYear = date.getFullYear();
         if (!this.person.birthDate || this.person.birthDate.length != 10) {
@@ -82,11 +90,16 @@ class PersonClass {
         return `${currentYear - yearOfBirth} years.`
     }
 
-    getFullAddress = function () {
-        if (!this.person.address.country || !this.person.address.city || !this.person.address.street || !this.person.address.house || !this.person.address.apartment) {
+    getFullAddress() {
+        const { country, city, street, apartment, house } = this.person.address;
+        if (!country || !city || !street || !house) {
             return `Please fill all the fields.`
         }
-        return `${this.person.address.country}, ${this.person.address.city}, ${this.person.address.street}, ${this.person.address.house}/${this.person.address.apartment}`
+        let result = `${country}, ${city}, ${street}, ${house}`
+        if (apartment) {
+            result = `${result} / ${apartment}`
+        }
+        return result
     }
 }
 
@@ -105,7 +118,7 @@ class WorkingPersonClass extends PersonClass {
         super(person);
     }
 
-    getProfessionalNameAndRank = function () {
+    getProfessionalNameAndRank() {
         if (!this.person.firstName || !this.person.lastName || !this.person.job.title || !this.person.job.experience) {
             return `Please fill all the fields.`
         }
