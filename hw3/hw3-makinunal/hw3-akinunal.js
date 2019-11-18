@@ -4,47 +4,51 @@ getAge() => returns age of person in format "[number] years", e.g. "25 years";
 getFullAddress() => returns address string in format "[country], [city], [street], [house]/[apartment]". Field apartment is optional. E.g. "Ukraine, Lviv, Doroshenka street, 5/8" and "Ukraine, Lviv, Muchna street, 7".
 Please implement error handling in case if some fields are not available.
 */
-import { SarahMay, JeremieBrown, Elizabeth } from './people.data.js';
-
+import { SarahMay, JeremieBrown, Elizabeth } from '../people.data.js';
 console.log('------ QUESTION: 1 ------')
 
 function PersonFunc(prs) {
     this.person = prs
-    this.fullName = function () {
-        if (!this.person.firstName || !this.person.lastName) {
-            return `Unknown first/last name.`
-        }
-        return `${this.person.firstName} ${this.person.lastName}`;
-    }
+}
 
-    this.getAge = function () {
-        let date = new Date()
-        let currentYear = date.getFullYear();
-        if (!this.person.birthDate || this.person.birthDate.length != 10) {
-            return `Unknown birth date.`
-        }
-        let yearOfBirth = parseInt(this.person.birthDate.slice(6, 10));
-        return `${currentYear - yearOfBirth} years.`
+PersonFunc.prototype.getFullName = function () {
+    let person = this.person;
+    if (!person.firstName) {
+        return `Unknown name.`
     }
-
-    this.getFullAddress = function () {
-        const { country, city, street, apartment, house } = this.person.address;
-        if (!country || !city || !street || !house) {
-            return `Please fill all the fields.`
-        }
-        let result = `${country}, ${city}, ${street}, ${house}`
-        if (apartment) {
-            result = `${result} / ${apartment}`
-        }
+    let result = `${person.firstName} ${person.lastName}`;
+    if (person.lastName) {
         return result
     }
+    return person.firstName
+}
+
+PersonFunc.prototype.getAge = function () {
+    const currentYear = new Date().getFullYear();
+    if (!this.person.birthDate || this.person.birthDate.length != 10) {
+        return `Unknown birth date.`
+    }
+    let yearOfBirth = parseInt(this.person.birthDate.slice(6, 10));
+    return `${currentYear - yearOfBirth} years.`
+}
+
+PersonFunc.prototype.getFullAddress = function () {
+    const { country, city, street, apartment, house } = this.person.address;
+    if (!country || !city || !street || !house) {
+        return `Please fill all the fields.`
+    }
+    let result = `${country}, ${city}, ${street}, ${house}`
+    if (apartment) {
+        result = `${result} / ${apartment}`
+    }
+    return result
 }
 
 let sarahCons = new PersonFunc(SarahMay);
 let jeremieCons = new PersonFunc(JeremieBrown);
 let elizabethCons = new PersonFunc(Elizabeth);
 
-console.log(sarahCons.fullName());
+console.log(sarahCons.getFullName());
 console.log(jeremieCons.getAge());
 console.log(elizabethCons.getFullAddress());
 
@@ -56,9 +60,16 @@ console.log('------ QUESTION: 2 ------')
 
 function WorkingPersonFunc(person) {
     PersonFunc.call(this, person);
-    this.getProfessionalNameAndRank = function () {
-        return `${this.person.firstName} ${this.person.lastName}, ${this.person.job.title}, job experience ${this.person.job.experience} years.`
+}
+
+WorkingPersonFunc.prototype.getProfessionalNameAndRank = function () {
+    const fullName = PersonFunc.prototype.getFullName.call(this);
+    let job = this.person.job;
+    let result = `${fullName}, ${job.title}, job experience ${job.experience} years.`
+    if (!job.title || !job.experience) {
+        return `Unknown job title or experience`
     }
+    return result
 }
 
 let sarahConsJob = new WorkingPersonFunc(SarahMay);
@@ -73,16 +84,20 @@ class PersonClass {
     constructor(person) {
         this.person = person
     }
-    fullName() {
-        if (!this.person.firstName || !this.person.lastName) {
-            return `Unknown first/last name.`
+    getFullName() {
+        let person = this.person;
+        if (!person.firstName) {
+            return `Unknown name.`
         }
-        return `${this.person.firstName} ${this.person.lastName}`;
+        let result = `${person.firstName} ${person.lastName}`;
+        if (person.lastName) {
+            return result
+        }
+        return person.firstName
     }
 
     getAge() {
-        let date = new Date()
-        let currentYear = date.getFullYear();
+        const currentYear = new Date().getFullYear();
         if (!this.person.birthDate || this.person.birthDate.length != 10) {
             return `Unknown birth date.`
         }
@@ -106,7 +121,7 @@ class PersonClass {
 let sarahClass = new PersonClass(SarahMay);
 let jeremieClass = new PersonClass(JeremieBrown);
 let elizabethClass = new PersonClass(Elizabeth);
-console.log(sarahClass.fullName());
+console.log(sarahClass.getFullName());
 console.log(jeremieClass.getAge());
 console.log(elizabethClass.getFullAddress());
 
@@ -119,12 +134,16 @@ class WorkingPersonClass extends PersonClass {
     }
 
     getProfessionalNameAndRank() {
-        if (!this.person.firstName || !this.person.lastName || !this.person.job.title || !this.person.job.experience) {
-            return `Please fill all the fields.`
+        const fullName = this.getFullName();
+        let job = this.person.job;
+        let result = `${fullName}, ${job.title}, job experience ${job.experience} years.`
+        if (!job.title || !job.experience) {
+            return `Unknown job title or experience`
         }
-        return `${this.person.firstName} ${this.person.lastName}, ${this.person.job.title}, job experience ${this.person.job.experience} years.`
+        return result
     }
 }
+
 let sarahClassJob = new WorkingPersonClass(SarahMay);
 let jeremieClassJob = new WorkingPersonClass(JeremieBrown);
 console.log(sarahClassJob.getProfessionalNameAndRank());
