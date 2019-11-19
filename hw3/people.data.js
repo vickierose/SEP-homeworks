@@ -11,9 +11,9 @@ export const SarahMay = {
   },
   job: {
     title: "teacher",
-    experience: 5,
-  },
-};
+    experience: 5
+  }
+}
 
 export const JeremieBrown = {
   firstName: "Jeremie",
@@ -23,13 +23,13 @@ export const JeremieBrown = {
     country: "Great Britain",
     city: "Bristol",
     street: "Park street",
-    house: "14",
+    house: "14"
   },
   job: {
     title: "sale manager",
-    experience: 10,
-  },
-};
+    experience: 10
+  }
+}
 
 export const Elizabeth = {
   firstName: "Elizabeth",
@@ -43,6 +43,6 @@ export const Elizabeth = {
   },
   job: {
     title: "fitness coach",
-    experience: 1.5,
-  },
-};
+    experience: 1.5 
+  }
+}

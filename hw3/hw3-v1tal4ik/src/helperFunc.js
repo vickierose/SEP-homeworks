@@ -1,6 +1,6 @@
 const validateObj = (obj) => {
   const allOfMainProp = ['firstName', 'lastName', 'birthDate', 'address', 'job'];
-  const allOfAddressProp = ['country', 'city', 'street', 'house', 'apartment'];
+  const allOfAddressProp = ['country', 'city', 'street', 'house'];
   const allOfJobProp = ['title', 'experience'];
   const info = {
     isObjHasAllProperty: true,
@@ -59,7 +59,7 @@ const validateObj = (obj) => {
     }
   }
 
-  if (Object.keys(obj.address).length !== allOfAddressProp.length) {
+  if (Object.keys(obj.address).length < allOfAddressProp.length) {
     info.isObjHasAllProperty = false;
     info.msg = `Error : Object address propery length = ${Object.keys(obj).length} and must be = ${Object.keys(allOfAddressProp).length}`;
     return info;
