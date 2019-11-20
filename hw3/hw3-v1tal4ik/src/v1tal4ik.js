@@ -15,7 +15,7 @@ const PersonFunc = function (obj) {
 PersonFunc.prototype.getFullName = function () { return `${this.person.firstName} ${this.person.lastName}`; };
 PersonFunc.prototype.getFullAddress = function () {
   const { country, city, street, house, apartment } = this.person.address;
-  return `${country}, ${city}, ${street}, ${house}/${apartment}`;
+  return `${country}, ${city}, ${street}, ${house}${ apartment ? '/' + apartment : '' }`.trim();
 };
 PersonFunc.prototype.getAge = function () {
   const nowYear = new Date().getFullYear();
@@ -59,7 +59,7 @@ class PersonClass {
     const {
       country, city, street, house, apartment,
     } = this.person.address;
-    return `${country}, ${city}, ${street}, ${house}/${apartment}`;
+    return `${country}, ${city}, ${street}, ${house}${ apartment ? '/' + apartment : '' }`.trim();
   }
 
   getAge() {
@@ -143,7 +143,6 @@ const customPerson = new WorkingPersonClass({
     city: 'Ternopil',
     street: 'Lychakivska',
     house: '11',
-    apartment: '58',
   },
   job: {
     title: 'trainee frontend dev',
@@ -154,6 +153,7 @@ console.log('* getFullName :', customPerson.getFullName());
 console.log('* getFullAddress :', customPerson.getFullAddress());
 console.log('* getAge :', customPerson.getAge());
 console.log('* getProfessionalNameAndRank :', customPerson.getProfessionalNameAndRank());
+
 
 export {
   PersonFunc,
