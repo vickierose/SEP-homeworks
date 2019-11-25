@@ -1,16 +1,15 @@
-
-class WorkingPersonClass extends PersonClass {
-	constructor(person) {
-		super(person);
-	}
-
-	getProfessionalNameAndRank = () => {
-		const { title, experience } = this.person.job;
-		var personJob = `${this.getFullName()}, ${title}, ${title}, job experience ${experience} years`;
-		return personJob;
-	}
+function WorkingPersonClass(person) {
+	this.person = person;
 }
-  
+
+WorkingPersonClass.prototype = Object.create(PersonFunc);
+
+WorkingPersonClass.prototype.getProfessionalNameAndRank = function () {
+	const personName = PersonFunc.prototype.getFullName.call(this);
+	const { title, experience } = this.person.job;
+	var personJob = `${personName},  ${title}, job experience ${experience} years`;
+	return personJob;
+}
 
 const sarah1 = new WorkingPersonClass(SarahMay);
 console.warn(sarah1.getProfessionalNameAndRank());
