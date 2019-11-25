@@ -60,12 +60,9 @@ evenNum(range);
 
 // 4
 
-argumentsLogger = (...arguments) => {
-  let arr = [];
+function argumentsLogger () {
+  let arr = [...arguments];
   let res = '';
-  for (let arg of arguments) {
-    arr.push(arg);
-  }
   arr.forEach((element, index) => {
     res += `argument ${index}: ${element}; `;
   });
@@ -107,7 +104,7 @@ let proxy = new Proxy(a, {
     if (prop in target) {
       return target[prop];
     } else {
-      console.log('There is no such fruit')
+      return 'There is no such fruit';
     }
   }
 });
