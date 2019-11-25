@@ -27,25 +27,29 @@ for (const value of range) {
 
 
 // 2. Loop through iterable object created in task 1 and create an array which contains only odd numbers. Expected result:
-// 3. Create array which contains only even numbers from iterable created in task 1 with some other method than in task 2. Expected result:
 const arrOfOddNumbers = [];
-const arrOfEvenNumbers = [];
-
 for (const value of range) {
-  (value % 2 === 0) ? arrOfEvenNumbers.push(value) : arrOfOddNumbers.push(value);
+  (value % 2 !== 0) ? arrOfOddNumbers.push(value) : null;
 }
-// console.log(arrOfOddNumbers);
-// console.log(arrOfEvenNumbers);
+
+console.log(arrOfOddNumbers);
+
+
+// 3. Create array which contains only even numbers from iterable created in task 1 with some other method than in task 2. Expected result:
+const arrOfEvenNumbers = Array.from(range, (item) => (item % 2 === 0 ? item : null)).filter((item) => item !== null);
+
+console.log(arrOfEvenNumbers);
 
 
 // 4. Write a function which accepts **any** number of arguments and returns a string in format `"argument [index]: [argument]; argument [index]: [argument];"`, e.g.`"argument 0: 1; argument 1: 4; argument 2: 79;"`. More vivid description:
-const argumentsLogger = (...arg) => {
+function argumentsLogger() {
+  const arr = [...arguments];
   let str = '';
-  arg.forEach((el, index) => {
+  arr.forEach((el, index) => {
     str += `argument ${index}: ${el}, `;
   });
   return str;
-};
+}
 
 console.log(argumentsLogger(12, 22, 3, 4, 56));
 
