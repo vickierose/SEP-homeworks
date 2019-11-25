@@ -38,8 +38,8 @@ for (let number of arrayNumbers) {
 console.log(evenNumbers);
 
 // 4
-function argumentsLogger(...args) {
-  let arrayArgs = [...args];
+function argumentsLogger() {
+  let arrayArgs = [...arguments];
   let str = '';
   for (let arg in arrayArgs) {
     str += `argument ${arg}: ${arrayArgs[arg]}; `
