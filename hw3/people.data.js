@@ -1,5 +1,4 @@
-
-  export const SarahMay = {
+export const SarahMay = {
     firstName: "Sarah",
     lastName: "May",
     birthDate: "13.03.1990",
