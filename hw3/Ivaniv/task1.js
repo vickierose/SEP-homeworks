@@ -95,5 +95,50 @@ console.warn(jeremieBrown.getAge());
 console.warn(jeremieBrown.getFullAddress());
 
 
+class PersonClass {
+    constructor(person) {
+        this.person = person;
+    }
+	getFullName() {
+		const { firstName, lastName } = this.person;
+		if (!firstName) {
+			return "No name!";
+		} else if (firstName && lastName) {
+			return `${firstName} ${lastName}`;
+		} else if (firstName && !lastName) {
+			return firstName;
+		}
+	}
+	
+	getAge() {
+		let todayYear = new Date().getFullYear();
+		let yearBirth = parseInt(this.person.birthDate.slice(6, 10));
+		let age = `${todayYear - yearBirth} years.`
+		return age;
+	}
+	
+	
+	getFullAddress() {
+		const { country, city, street, house, apartment = '' } = this.person.address;
+		let fullAddress = `${country}, ${city}, ${street}, ${house} ${apartment}`;
+		if (!this.person.address.country || !this.person.address.city || !this.person.address.street || !this.person.address.house) {
+			return console.warn('You need to complete all the required fields.');
+		}
+		return fullAddress;
+	}
+}
 
+var sarahClass = new PersonClass(SarahMay);
+console.warn(sarahClass.getFullName());
+console.warn(sarahClass.getAge());
+console.warn(sarahClass.getFullAddress());
 
+var jeremieClass = new PersonClass(JeremieBrown);
+console.warn(jeremieClass.getAge());
+console.warn(jeremieClass.getAge());
+console.warn(jeremieClass.getFullAddress());
+
+var elizabethClass = new PersonClass(Elizabeth);
+console.warn(elizabethClass.getAge());
+console.warn(elizabethClass.getAge());
+console.warn(elizabethClass.getFullAddress());
